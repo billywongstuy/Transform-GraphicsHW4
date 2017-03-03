@@ -1,35 +1,57 @@
 import math
 
+#transformation matrices rows and cols need to be flipped
+
 def make_translate( x, y, z ):
-    trans_matrix = [[1,0,0,x],[0,1,0,y],[0,0,1,z]]
+    trans_matrix = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[x,y,z,1]]
     return trans_matrix
 
 def make_scale( x, y, z ):
-    scale_matrix = [[x,0,0,0],[0,y,0,0],[0,0,z,0]]
+    scale_matrix = [[x,0,0,0],[0,y,0,0],[0,0,z,0],[0,0,0,1]]
     return scale_matrix
 
 def make_rotX( theta ):
     rotX_matrix = []
     rotX_matrix.append([1,0,0,0])
-    rotX_matrix.append([0,math.cos(theta),-math.sin(theta),0])
-    rotX_matrix.append([0,math.sin(theta),math.cos(theta),0])
+    rotX_matrix.append([0,math.cos(theta),math.sin(theta),0])
+    rotX_matrix.append([0,-math.sin(theta),math.cos(theta),0])
     rotX_matrix.append([0,0,0,1])
     return rotX_matrix
 
+
 def make_rotY( theta ):
     rotY_matrix = []
+
+
+    '''
     rotY_matrix.append([math.cos(theta),0,math.sin(theta),0])
     rotY_matrix.append([0,1,0,0])
     rotY_matrix.append([-math.sin(theta),0,0,math.cos(theta)])
     rotY_matrix.append([0,0,0,1])
+    '''
+
+    rotY_matrix.append([math.cos(theta),0,-math.sin(theta),0])
+    rotY_matrix.append([0,1,0,0])
+    rotY_matrix.append([math.sin(theta),0,0,0])
+    rotY_matrix.append([0,0,math.cos(theta),1])
+    
     return rotY_matrix
 
 def make_rotZ( theta ):
     rotZ_matrix = []
+
+    '''
     rotZ_matrix.append([math.cos(theta),-math.sin(theta),0,0]) #'x-axis'
     rotZ_matrix.append([math.sin(theta),math.cos(theta),0,0]) #'y-axis'
     rotZ_matrix.append([0,0,1,0])
     rotZ_matrix.append([0,0,0,1])
+    '''
+
+    rotZ_matrix.append([math.cos(theta),math.sin(theta),0,0])
+    rotZ_matrix.append([-math.sin(theta),math.cos(theta),0,0])
+    rotZ_matrix.append([0,0,1,0])
+    rotZ_matrix.append([0,0,0,1])
+
     return rotZ_matrix
 
 def print_matrix( matrix ):
@@ -55,7 +77,8 @@ def scalar_mult( matrix, s ):
             
 #m1 * m2 -> m2
 def matrix_mult( m1, m2 ):
-    
+    #print 'm1: ',m1
+    #print 'm2: ',m2
     point = 0
     for row in m2:
         #get a copy of the next point

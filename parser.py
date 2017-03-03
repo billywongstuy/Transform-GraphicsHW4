@@ -51,7 +51,7 @@ def parse_file( fname, points, transform, screen, color ):
     i = 0
     end = len(lines)
 
-    one_line = ['display','apply']
+    one_line = ['display','apply','ident','']
     if len(lines)-1 in one_line:
         end+=1
     
@@ -67,10 +67,10 @@ def parse_file( fname, points, transform, screen, color ):
         elif command == 'ident':
             ident(transform)
         elif command == 'scale':
-            scale_matrix = make_scale(args[0],args[1],args[2])
+            scale_matrix = make_scale(float(args[0]),float(args[1]),float(args[2]))
             matrix_mult(scale_matrix,transform)
         elif command == 'move':
-            move_matrix = make_translate(args[0],args[1],args[2])
+            move_matrix = make_translate(float(args[0]),float(args[1]),float(args[2]))
             matrix_mult(move_matrix,transform)
         elif command == 'rotate':
             
@@ -104,6 +104,8 @@ def parse_file( fname, points, transform, screen, color ):
         elif command == 'save':
             draw_lines(points,screen,color)
             save_extension(screen, args[0])
+        elif command == "" or command[0] == '#':
+            i+=0
         else:
             print 'Error occurred'
             exit

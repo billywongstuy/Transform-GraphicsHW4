@@ -9,6 +9,46 @@ line
 line
 50 150 0 150 150 0
 rotate
-z math.pi/4
+z math.pi/6
 apply
+
+
+line
+0 0 0 500 500 0
+line
+50 50 0 50 150 0
+line
+150 50 0 150 150 0
+line
+50 50 0 150 50 0
+line
+50 150 0 150 150 0
+
+apply
+
+
+line
+0 0 0 500 500 0
+line
+50 50 0 50 150 0
+line
+150 50 0 150 150 0
+line
+50 50 0 150 50 0
+line
+50 150 0 150 150 0
+
+apply
+
+line
+0 0 0 500 500 0
+line
+50 50 0 50 150 0
+line
+150 50 0 150 150 0
+line
+50 50 0 150 50 0
+line
+50 150 0 150 150 0
+
 display
