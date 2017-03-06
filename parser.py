@@ -39,21 +39,41 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 
+def line_write(x0,y0,z0,x1,y1,z1):
+    return 'line\n%d %d %d %d %d %d\n' % (x0,y0,z0,x1,y1,z1)
+def scale_write(x,y,z):
+    return 'scale\n%d %d %d\n' % (x,y,z)
+def move_write(x,y,z):
+    return 'move\n%d %d %d\n' % (x,y,z)
+def rotate_write(a,t):
+    return 'rotate\n%s %s\n' % (a,t)
+def save_write(f):
+    return 'save\n%s\n' % (f)
 
 
-
-# HOW TO DEAL WITH NEGATIVES
-
+def setup_script():
+    f = open('script','w')
+    for i in range(0,3):
+        f.write(line_write(0,0,0,500,500,0))
+        f.write(line_write(50,50,0,50,150,0))
+        f.write(line_write(150,50,0,150,150,0))
+        f.write(line_write(50,50,0,150,50,0))
+        f.write(line_write(50,150,0,150,150,0))
+        f.write('ident\n')
+        f.write(rotate_write('z','math.pi/12'))
+        f.write('apply\n')
+    f.write(line_write(0,0,0,500,500,0))
+    f.write('display\n')
+    f.close()
 
 def parse_file( fname, points, transform, screen, color ):
+    setup_script()
     f = open(fname,'r+')
     lines = f.readlines()
     i = 0
     end = len(lines)
 
     one_line = ['display','apply','ident','']
-    if len(lines)-1 in one_line:
-        end+=1
     
     while i < end:
         command = lines[i].rstrip('\n')
@@ -73,6 +93,8 @@ def parse_file( fname, points, transform, screen, color ):
             move_matrix = make_translate(float(args[0]),float(args[1]),float(args[2]))
             matrix_mult(move_matrix,transform)
         elif command == 'rotate':
+
+            # negative rotations need to be done
             
             theta = args[1]
             if theta[0:7] == 'math.pi':

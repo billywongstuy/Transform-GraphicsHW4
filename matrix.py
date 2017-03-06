@@ -3,6 +3,7 @@ import math
 #transformation matrices rows and cols need to be flipped
 
 def make_translate( x, y, z ):
+    #
     trans_matrix = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[x,y,z,1]]
     return trans_matrix
 
@@ -12,6 +13,14 @@ def make_scale( x, y, z ):
 
 def make_rotX( theta ):
     rotX_matrix = []
+
+    '''
+    rotX_matrix.append([1,0,0,0])
+    rotX_matrix.append([0,math.cos(theta),-math.sin(theta),0])
+    rotX_matrix.append([0,math.sin(theta),math.cos(theta),0])
+    rotX_matrix.append([0,0,0,1])
+    '''
+    
     rotX_matrix.append([1,0,0,0])
     rotX_matrix.append([0,math.cos(theta),math.sin(theta),0])
     rotX_matrix.append([0,-math.sin(theta),math.cos(theta),0])
