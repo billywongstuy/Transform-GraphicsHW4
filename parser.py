@@ -51,8 +51,8 @@ def save_write(f):
     return 'save\n%s\n' % (f)
 
 
-def setup_script():
-    f = open('script','w')
+def setup_script(fname):
+    f = open(fname,'w')
     for i in range(0,3):
         f.write(line_write(0,0,0,500,500,0))
         f.write(line_write(50,50,0,50,150,0))
@@ -67,7 +67,8 @@ def setup_script():
     f.close()
 
 def parse_file( fname, points, transform, screen, color ):
-    setup_script()
+    #setup_script(fname)
+
     f = open(fname,'r+')
     lines = f.readlines()
     i = 0
@@ -77,7 +78,6 @@ def parse_file( fname, points, transform, screen, color ):
     
     while i < end:
         command = lines[i].rstrip('\n')
-        #print command
         if i != len(lines)-1:
             args = lines[i+1].rstrip('\n').split(' ')
         else:
