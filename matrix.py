@@ -1,3 +1,4 @@
+from __future__ import division
 import math
 
 #transformation matrices rows and cols need to be flipped
@@ -55,12 +56,12 @@ def make_rotZ( theta ):
     rotZ_matrix.append([0,0,1,0])
     rotZ_matrix.append([0,0,0,1])
     '''
-
+    
     rotZ_matrix.append([math.cos(theta),math.sin(theta),0,0])
     rotZ_matrix.append([-math.sin(theta),math.cos(theta),0,0])
     rotZ_matrix.append([0,0,1,0])
     rotZ_matrix.append([0,0,0,1])
-
+    
     return rotZ_matrix
 
 def print_matrix( matrix ):
